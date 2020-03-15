@@ -50,7 +50,22 @@ router.get('/:id/edit', (req, res) => {
 
 // 修改一筆record
 router.put('/:id', (req, res) => {
-  res.send('Update one record')
+  const { name, category, date, amount } = req.body
+  const recordId = req.params.id
+
+  Record.findById(recordId, (err, record) => {
+    if (err) return console.error(err)
+
+    record.name = name
+    record.category = category
+    record.date = date
+    record.amount = amount
+
+    record.save(err => {
+      if (err) return console.error(err)
+      res.redirect('/')
+    })
+  })
 })
 
 // 刪除一筆record
