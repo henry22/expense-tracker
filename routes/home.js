@@ -4,9 +4,10 @@ const Record = require('../models/record')
 const moment = require('moment')
 const sum = require('../public/js/sum')
 const replaceIcon = require('../public/js/replaceIcon')
+const {authenticated} = require('../config/auth')
 
 // Index 頁面/首頁
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   let dropdownText = '類別'
   const category = req.query.category
   const selectCategory = {}
