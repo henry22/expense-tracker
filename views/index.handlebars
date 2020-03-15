@@ -1,2 +1,17 @@
 {{!-- ./views/index.handlebars --}}
-<h1>Index page</h1>
+<p>類別</p>
+<p>總金額</p>
+
+<ul>
+  {{#each records}}
+    <li>
+      <p>{{{this.name}}}</p>
+      <p>{{{this.category}}}</p>
+      <p>{{{this.date}}}</p>
+      <p>{{{this.amount}}}</p>
+      <a href="#">修改</a>
+      <a href="#">刪除</a>
+    </li>
+  {{/each}}
+  <a class="btn text-white border border-dark bg-warning" href="#">新增支出</a>
+</ul>
