@@ -7,10 +7,16 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const handlebars = require('handlebars')
 const methodOverride = require('method-override')
+const passport = require('passport')
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+require('./config/passport')(passport)
 
 handlebars.registerHelper('isEqual', (arg1, arg2, options) => {
   return arg1 === arg2 ? options.fn(this) : options.inverse(this)
@@ -28,6 +34,10 @@ db.once('open', () => console.log('mongodb connect'))
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 app.use('/', require('./routes/home'))
 app.use('/records', require('./routes/record'))
 app.use('/users', require('./routes/user'))

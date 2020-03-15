@@ -1,3 +1,3 @@
-module.exports = function (records) {
+module.exports = records => {
   return records.reduce((acc, cur) => acc += cur.amount, 0)
 }

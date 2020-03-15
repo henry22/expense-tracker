@@ -1,4 +1,4 @@
-module.exports = function (category) {
+module.exports = category => {
   switch (category) {
     case '家居物業':
       return '<i class="fas fa-home"></i>'
