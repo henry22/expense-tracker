@@ -30,5 +30,6 @@ app.set('view engine', 'handlebars')
 
 app.use('/', require('./routes/home'))
 app.use('/records', require('./routes/record'))
+app.use('/users', require('./routes/user'))
 
 app.listen(port, () => console.log('Server is running'))
