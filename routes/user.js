@@ -26,46 +26,66 @@ router.get('/register', (req, res) => {
 // 註冊檢查
 router.post('/register', (req, res) => {
   const { name, email, password, password2 } = req.body
+  let errors = []
 
-  User.findOne({ email: email }).then(user => {
-    if (user) {
-      console.log('user already exists')
+  if (!name || !email || !password || !password2) {
+    errors.push({ message: '所有欄位都是必填' })
+  }
 
-      return res.render('register', {
-        name,
-        email,
-        password,
-        password2
-      })
-    } else {
-      const newUser = new User({
-        name,
-        email,
-        password
-      })
+  if (password !== password2) {
+    errors.push({ message: '請確認兩次密碼是否相同' })
+  }
 
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err
-          newUser.password = hash
+  if (errors.length > 0) {
+    return res.render('register', {
+      errors,
+      name,
+      email,
+      password,
+      password2
+    })
+  } else {
+    User.findOne({ email: email }).then(user => {
+      if (user) {
+        console.log('user already exists')
 
-          newUser
-            .save()
-            .then(user => {
-              return res.redirect('/')
-            })
-            .catch(err => {
-              return console.error(err)
-            })
+        return res.render('register', {
+          name,
+          email,
+          password,
+          password2
         })
-      })
-    }
-  })
+      } else {
+        const newUser = new User({
+          name,
+          email,
+          password
+        })
+
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err
+            newUser.password = hash
+
+            newUser
+              .save()
+              .then(user => {
+                return res.redirect('/')
+              })
+              .catch(err => {
+                return console.error(err)
+              })
+          })
+        })
+      }
+    })
+  }
 })
 
 // 登出
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '您已經成功登出')
   return res.redirect('/users/login')
 })
 
