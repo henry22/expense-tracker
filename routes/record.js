@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
 // 新增一筆record頁面
 router.get('/new', (req, res) => {
-  res.render('new')
+  return res.render('new')
 })
 
 // 顯示一筆record詳細頁面
@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
 
   newRecord.save(err => {
     if (err) return console.error(err)
-    res.redirect('/')
+    return res.redirect('/')
   })
 })
 
@@ -44,7 +44,7 @@ router.get('/:id/edit', (req, res) => {
     .exec((err, record) => {
       if (err) return console.error(err)
       record.date = moment(record.date).format('YYYY/MM/DD')
-      res.render('edit', {record: record})
+      return res.render('edit', {record: record})
     })
 })
 
@@ -63,14 +63,23 @@ router.put('/:id', (req, res) => {
 
     record.save(err => {
       if (err) return console.error(err)
-      res.redirect('/')
+      return res.redirect('/')
     })
   })
 })
 
 // 刪除一筆record
-router.delete('/:id/delete', (req, res) => {
-  res.send('Delete one record')
+router.delete('/:id', (req, res) => {
+  const recordId = req.params.id
+
+  Record.findById(recordId, (err, record) => {
+    if (err) return console.error(err)
+
+    record.remove(err => {
+      if (err) return console.error(err)
+      return res.redirect('/')
+    })
+  })
 })
 
 module.exports = router

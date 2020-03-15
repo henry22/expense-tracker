@@ -10,7 +10,9 @@
       <p>{{{this.date}}}</p>
       <p>{{{this.amount}}}</p>
       <a href="/records/{{{this._id}}}/edit">修改</a>
-      <a href="#">刪除</a>
+      <form action="/records/{{{this._id}}}?_method=DELETE" method="POST" class="d-inline">
+        <button type="submit">刪除</button>
+      </form>
     </li>
   {{/each}}
   <a class="btn text-white border border-dark bg-warning" href="/records/new">新增支出</a>
