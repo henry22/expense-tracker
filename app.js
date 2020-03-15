@@ -13,8 +13,7 @@ mongoose.connect('mongodb://localhost/expense-tracker', {
 db.on('error', () => console.log('mongodb error'))
 db.once('open', () => console.log('mongodb connect'))
 
-app.get('/', (req, res) => {
-  res.send('expense tracker')
-})
+app.use('/', require('./routes/home'))
+app.use('/records', require('./routes/record'))
 
 app.listen(port, () => console.log('Server is running'))
