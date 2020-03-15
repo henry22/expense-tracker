@@ -6,7 +6,7 @@
         <span class="col-3">*必填欄位</span>
         <h4 class="col-9 text-center">請修改你的支出</h4>
       </div>
-      <form action="/records/{{{record._id}}}" method="POST">
+      <form action="/records/{{{record._id}}}?_method=PUT" method="POST">
         <div class="form-group row mb-5 d-flex align-items-center">
           <label for="name" class="col-3">名稱*：</label>
           <input
