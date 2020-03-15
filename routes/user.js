@@ -14,7 +14,7 @@ router.post('/login', (req, res) => {
 
 // 註冊頁面
 router.get('/register', (req, res) => {
-  res.send('Register')
+  res.render('register')
 })
 
 // 註冊檢查
