@@ -1,5 +1,15 @@
 {{!-- ./views/index.handlebars --}}
-<p>類別</p>
+<div class="dropdown">
+  <button class="btn btn-outline-light border border-dark bg-white dropdown-toggle text-dark" type="button" data-toggle="dropdown">{{{dropdownText}}}</button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="/">全部</a>
+    <a class="dropdown-item" href="/?category=家居物業">家居物業</a>
+    <a class="dropdown-item" href="/?category=交通出行">交通出行</a>
+    <a class="dropdown-item" href="/?category=休閒娛樂">休閒娛樂</a>
+    <a class="dropdown-item" href="/?category=餐飲食品">餐飲食品</a>
+    <a class="dropdown-item" href="/?category=其他">其他</a>
+  </div>
+</div>
 <p>總金額</p>
 
 <ul>

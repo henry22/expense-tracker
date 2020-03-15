@@ -5,7 +5,7 @@ const moment = require('moment')
 
 // 列出所有records
 router.get('/', (req, res) => {
-  res.send('List all records')
+  return res.redirect('/')
 })
 
 // 新增一筆record頁面
