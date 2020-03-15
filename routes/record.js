@@ -36,7 +36,14 @@ router.post('/', (req, res) => {
 
 // 修改一筆record頁面
 router.get('/:id/edit', (req, res) => {
-  res.send('Edit one record page')
+  const recordId = req.params.id
+
+  Record.findById(recordId)
+    .lean()
+    .exec((err, record) => {
+      if (err) return console.error(err)
+      res.render('edit', {record: record})
+    })
 })
 
 // 修改一筆record

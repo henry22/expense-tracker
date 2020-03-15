@@ -5,9 +5,14 @@ const mongoose = require('mongoose')
 const db = mongoose.connection
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const handlebars = require('handlebars')
 
 app.use(express.static('public'))
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
+
+handlebars.registerHelper('isEqual', (arg1, arg2, options) => {
+  return arg1 === arg2 ? options.fn(this) : options.inverse(this)
+})
 
 mongoose.connect('mongodb://localhost/expense-tracker', {
   useNewUrlParser: true,
