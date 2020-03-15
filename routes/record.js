@@ -2,24 +2,25 @@ const express = require('express')
 const router = express.Router()
 const Record = require('../models/record')
 const moment = require('moment')
+const {authenticated} = require('../config/auth')
 
 // 列出所有records
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   return res.redirect('/')
 })
 
 // 新增一筆record頁面
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   return res.render('new')
 })
 
 // 顯示一筆record詳細頁面
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticated, (req, res) => {
   res.send('Show one record detail page')
 })
 
 // 新增一筆record
-router.post('/', (req, res) => {
+router.post('/', authenticated, (req, res) => {
   const { name, category, date, amount } = req.body
 
   const newRecord = new Record({
@@ -36,7 +37,7 @@ router.post('/', (req, res) => {
 })
 
 // 修改一筆record頁面
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', authenticated, (req, res) => {
   const recordId = req.params.id
 
   Record.findById(recordId)
@@ -49,7 +50,7 @@ router.get('/:id/edit', (req, res) => {
 })
 
 // 修改一筆record
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticated, (req, res) => {
   const { name, category, date, amount } = req.body
   const recordId = req.params.id
 
@@ -69,7 +70,7 @@ router.put('/:id', (req, res) => {
 })
 
 // 刪除一筆record
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authenticated, (req, res) => {
   const recordId = req.params.id
 
   Record.findById(recordId, (err, record) => {

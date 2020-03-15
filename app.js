@@ -8,11 +8,17 @@ const bodyParser = require('body-parser')
 const handlebars = require('handlebars')
 const methodOverride = require('method-override')
 const passport = require('passport')
+const session = require('express-session')
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
+app.use(session({
+  secret: 'ac expense-tracker',
+  resave: false,
+  saveUninitialized: true
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 
