@@ -3,6 +3,7 @@ const router = express.Router()
 const Record = require('../models/record')
 const moment = require('moment')
 const sum = require('../public/js/sum')
+const replaceIcon = require('../public/js/replaceIcon')
 
 // Index 頁面/首頁
 router.get('/', (req, res) => {
@@ -23,7 +24,10 @@ router.get('/', (req, res) => {
       if (err) console.error(err)
       let totalAmount = sum(records)
 
-      records.forEach(record => record.date = moment(record.date).format('YYYY/MM/DD'))
+      records.forEach(record => {
+        record.date = moment(record.date).format('YYYY/MM/DD')
+        record.category = replaceIcon(record.category)
+      })
       res.render('index', {records: records, dropdownText: dropdownText, totalAmount: totalAmount})
     })
 })

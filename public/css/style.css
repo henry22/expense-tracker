@@ -1,0 +1,34 @@
+tr:nth-child(odd){
+	background-color: #f0f0f0;
+}
+
+.total-amount span {
+  font-size: 24px;
+}
+
+.total-amount h1 {
+  font-size: 64px;
+  color: #ff9100;
+}
+
+.records-table .record-amount {
+  font-size: 36px;
+}
+
+.records-table th i {
+  font-size: 48px;
+  color: #7dc8ff;
+}
+
+.records-table th,
+.records-table td {
+  vertical-align: middle;
+}
+
+.dropdown * {
+  font-size: 24px;
+}
+
+.create-btn {
+  font-size: 28px;
+}

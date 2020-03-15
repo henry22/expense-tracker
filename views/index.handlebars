@@ -1,7 +1,7 @@
 {{!-- ./views/index.handlebars --}}
-<div class="dropdown">
-  <button class="btn btn-outline-light border border-dark bg-white dropdown-toggle text-dark" type="button" data-toggle="dropdown">{{{dropdownText}}}</button>
-  <div class="dropdown-menu">
+<div class="dropdown text-center">
+  <button class="btn btn-outline-light border border-dark bg-white dropdown-toggle text-dark d-flex align-items-center justify-content-between col-8 col-md-6 col-lg-4 mx-auto mb-4" type="button" data-toggle="dropdown">{{{dropdownText}}}</button>
+  <div class="dropdown-menu col-6 col-lg-4 col-md-5">
     <a class="dropdown-item" href="/">全部</a>
     <a class="dropdown-item" href="/?category=家居物業">家居物業</a>
     <a class="dropdown-item" href="/?category=交通出行">交通出行</a>
@@ -10,9 +10,36 @@
     <a class="dropdown-item" href="/?category=其他">其他</a>
   </div>
 </div>
-<p>總金額: {{{totalAmount}}}</p>
 
-<ul>
+<div class="d-flex justify-content-center mb-4 total-amount">
+  <span class="mr-5">總金額:</span>
+  <h1>{{{totalAmount}}}</h1>
+</div>
+
+
+<table class="table col-10 mx-auto records-table">
+  <tbody>
+    {{#each records}}
+      <tr>
+        <th>{{{this.category}}}</th>
+        <td>
+          <h3>{{{this.name}}}</h3><span>{{{this.date}}}</span>
+        </td>
+        <td class="record-amount">{{{this.amount}}}</td>
+        <td>
+          <a href="/records/{{{this._id}}}/edit" class="btn btn-success"><i class="fas fa-edit"></i>修改</a>
+          <form action="/records/{{{this._id}}}?_method=DELETE" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>刪除</button>
+          </form>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<div class="text-center my-4">
+  <a class="btn text-white border border-dark bg-warning create-btn" href="/records/new">新增支出</a>
+</div>
+{{!-- <ul>
   {{#each records}}
     <li>
       <p>{{{this.name}}}</p>
@@ -26,4 +53,4 @@
     </li>
   {{/each}}
   <a class="btn text-white border border-dark bg-warning" href="/records/new">新增支出</a>
-</ul>
+</ul> --}}
