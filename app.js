@@ -3,6 +3,7 @@ const app = express()
 const port = 3000
 const mongoose = require('mongoose')
 const db = mongoose.connection
+const exphbs = require('express-handlebars')
 
 mongoose.connect('mongodb://localhost/expense-tracker', {
   useNewUrlParser: true,
@@ -12,6 +13,9 @@ mongoose.connect('mongodb://localhost/expense-tracker', {
 
 db.on('error', () => console.log('mongodb error'))
 db.once('open', () => console.log('mongodb connect'))
+
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
 
 app.use('/', require('./routes/home'))
 app.use('/records', require('./routes/record'))
