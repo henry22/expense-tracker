@@ -1,15 +1,39 @@
 {{!-- ./views/index.handlebars --}}
-<div class="dropdown text-center">
-  <button class="btn btn-outline-light border border-dark bg-white dropdown-toggle text-dark d-flex align-items-center justify-content-between col-8 col-md-6 col-lg-4 mx-auto mb-4" type="button" data-toggle="dropdown">{{{dropdownText}}}</button>
-  <div class="dropdown-menu col-6 col-lg-4 col-md-5">
-    <a class="dropdown-item" href="/">全部</a>
-    <a class="dropdown-item" href="/?category=家居物業">家居物業</a>
-    <a class="dropdown-item" href="/?category=交通出行">交通出行</a>
-    <a class="dropdown-item" href="/?category=休閒娛樂">休閒娛樂</a>
-    <a class="dropdown-item" href="/?category=餐飲食品">餐飲食品</a>
-    <a class="dropdown-item" href="/?category=其他">其他</a>
+<div class="d-flex justify-content-center">
+  {{!-- month dropdown --}}
+  <div class="dropdown text-center my-4 col-10">
+    <button class="btn btn-outline-light border border-dark bg-white dropdown-toggle text-dark d-flex align-items-center justify-content-between col-8 col-md-6 col-lg-4 ml-auto mb-4" type="button" data-toggle="dropdown">月份</button>
+    <div class="dropdown-menu col-6 col-lg-4 col-md-5">
+      <a class="dropdown-item" href="/">全部</a>
+      <a class="dropdown-item" href='/?month=01'>一月</a>
+      <a class="dropdown-item" href='/?month=02'>二月</a>
+      <a class="dropdown-item" href='/?month=03'>三月</a>
+      <a class="dropdown-item" href='/?month=04'>四月</a>
+      <a class="dropdown-item" href='/?month=05'>五月</a>
+      <a class="dropdown-item" href='/?month=06'>六月</a>
+      <a class="dropdown-item" href='/?month=07'>七月</a>
+      <a class="dropdown-item" href='/?month=08'>八月</a>
+      <a class="dropdown-item" href='/?month=09'>九月</a>
+      <a class="dropdown-item" href='/?month=10'>十月</a>
+      <a class="dropdown-item" href='/?month=11'>十一月</a>
+      <a class="dropdown-item" href='/?month=12'>十二月</a>
+    </div>
+  </div>
+
+  {{!-- category dropdown --}}
+  <div class="dropdown text-center my-4 col-10">
+    <button class="btn btn-outline-light border border-dark bg-white dropdown-toggle text-dark d-flex align-items-center justify-content-between col-8 col-md-6 col-lg-4 mr-auto mb-4" type="button" data-toggle="dropdown">{{{dropdownText}}}</button>
+    <div class="dropdown-menu col-6 col-lg-4 col-md-5">
+      <a class="dropdown-item" href="/">全部</a>
+      <a class="dropdown-item" href="/?category=家居物業">家居物業</a>
+      <a class="dropdown-item" href="/?category=交通出行">交通出行</a>
+      <a class="dropdown-item" href="/?category=休閒娛樂">休閒娛樂</a>
+      <a class="dropdown-item" href="/?category=餐飲食品">餐飲食品</a>
+      <a class="dropdown-item" href="/?category=其他">其他</a>
+    </div>
   </div>
 </div>
+
 
 <div class="d-flex justify-content-center mb-4 total-amount">
   <span class="mr-5">總金額:</span>
