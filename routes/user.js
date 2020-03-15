@@ -4,7 +4,7 @@ const router = express.Router()
 
 // 登入頁面
 router.get('/login', (req, res) => {
-  res.send('Login')
+  res.render('login')
 })
 
 // 登入檢查
