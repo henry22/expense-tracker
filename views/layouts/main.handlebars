@@ -15,7 +15,11 @@
 <body>
   <nav class="navbar navbar-light bg-light justify-content-between">
     <a class="navbar-brand" href="/">家庭記帳本</a>
-    <a class="btn btn-outline-light text-warning border border-dark bg-white" href="#">登出</a>
+    {{#if isAuthenticated}}
+    <a class="btn btn-outline-light text-warning border border-dark bg-white" href="/users/logout">登出</a>
+    {{else}}
+    <a class="btn btn-outline-light text-warning border border-dark bg-white" href="/users/login">登入</a>
+    {{/if}}
   </nav>
 
   <main class="container mt-3">

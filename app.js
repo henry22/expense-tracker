@@ -42,6 +42,7 @@ app.set('view engine', 'handlebars')
 
 app.use((req, res, next) => {
   res.locals.user = req.user
+  res.locals.isAuthenticated = req.isAuthenticated()
   next()
 })
 app.use('/', require('./routes/home'))
