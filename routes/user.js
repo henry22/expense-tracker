@@ -55,8 +55,9 @@ router.post('/register', (req, res) => {
 })
 
 // 登出
-router.get('logout', (req, res) => {
-  res.send('Logout')
+router.get('/logout', (req, res) => {
+  req.logout()
+  return res.redirect('/users/login')
 })
 
 module.exports = router
