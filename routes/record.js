@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../models/record')
+const moment = require('moment')
 
 // 列出所有records
 router.get('/', (req, res) => {
@@ -42,6 +43,7 @@ router.get('/:id/edit', (req, res) => {
     .lean()
     .exec((err, record) => {
       if (err) return console.error(err)
+      record.date = moment(record.date).format('YYYY/MM/DD')
       res.render('edit', {record: record})
     })
 })
