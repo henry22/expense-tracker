@@ -19,7 +19,8 @@ router.get('/', authenticated, (req, res) => {
     dropdownText = '全部'
   }
 
-  Record.find(selectCategory)
+  Record.find({userId: req.user._id})
+    .find(selectCategory)
     .lean()
     .exec((err, records) => {
       if (err) console.error(err)
