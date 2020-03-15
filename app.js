@@ -4,6 +4,10 @@ const port = 3000
 const mongoose = require('mongoose')
 const db = mongoose.connection
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
+
+app.use(express.static('public'))
+app.use(bodyParser.urlencoded({extended: true}))
 
 mongoose.connect('mongodb://localhost/expense-tracker', {
   useNewUrlParser: true,

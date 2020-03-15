@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const Record = require('../models/record')
 
 // 列出所有records
 router.get('/', (req, res) => {
@@ -8,7 +9,7 @@ router.get('/', (req, res) => {
 
 // 新增一筆record頁面
 router.get('/new', (req, res) => {
-  res.send('Add one record page')
+  res.render('new')
 })
 
 // 顯示一筆record詳細頁面
@@ -18,7 +19,19 @@ router.get('/:id', (req, res) => {
 
 // 新增一筆record
 router.post('/', (req, res) => {
-  res.send('Post one record')
+  const { name, category, date, amount } = req.body
+
+  const newRecord = new Record({
+    name: name,
+    category: category,
+    date: date,
+    amount: amount
+  })
+
+  newRecord.save(err => {
+    if (err) return console.error(err)
+    res.redirect('/')
+  })
 })
 
 // 修改一筆record頁面
