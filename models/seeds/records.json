@@ -28,5 +28,35 @@
     "category": "家居物業",
     "date": "2019/04/01",
     "amount": 25000
+  },
+  {
+    "name": "投資",
+    "category": "其他",
+    "date": "2020/03/15",
+    "amount": 10000
+  },
+  {
+    "name": "早餐",
+    "category": "餐飲食品",
+    "date": "2020/03/15",
+    "amount": 80
+  },
+  {
+    "name": "旅遊",
+    "category": "休閒娛樂",
+    "date": "2020/03/14",
+    "amount": 3000
+  },
+  {
+    "name": "計程車",
+    "category": "交通出行",
+    "date": "2020/03/14",
+    "amount": 200
+  },
+  {
+    "name": "換鎖",
+    "category": "家居物業",
+    "date": "2020/03/14",
+    "amount": 500
   }
 ]
