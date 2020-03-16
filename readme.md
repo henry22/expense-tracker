@@ -43,6 +43,12 @@
 2. 開啟網頁輸入: http://localhost:3000
 ```
 
+##### 4.測試帳號
+| Name  | Email               | Password     |
+| :---: | :-----------------: | :----------: |
+| user1 | user1@example.com   | 12345678     |
+| user2 | user2@example.com   | 12345678     |
+
 ## 使用者故事
 ##### 使用者 (老爸) 可以：
 
