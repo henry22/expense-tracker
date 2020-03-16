@@ -34,12 +34,17 @@
 3. 新增種子資料
 - 終端機上執行 npm run seeder
 - 確認 Robo 3T 資料已經建立了
+4. 進入Facebook開發者網站(https://developers.facebook.com/)
+- 註冊個人的secret key
+5. 建立.env的檔案，將個人的Facebook ID及Facebook Secrect貼在下述
+- FACEBOOK_ID=<FB ID>
+- FACEBOOK_SECRET=<FB SECRET>
 ```
 
 ##### 3.執行程式
 
 ```
-1. 終端機輸入: nodemon run dev
+1. 終端機輸入: npm run dev
 2. 開啟網頁輸入: http://localhost:3000
 ```
 
