@@ -16,18 +16,40 @@ db.on('error', () => console.log('mongodb error'))
 db.once('open', () => {
   console.log('mongodb connect')
 
-  User.create(users, (err, users) => {
-    users.forEach(user => {
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(user.password, salt, (err, hash) => {
-          if (err) throw err
-          user.password = hash
-
-          user.save()
+  User.create(users)
+    .then(() => {
+      User.find({ email: 'user1@example.com'}, (err, user) => {
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(user[0].password, salt, (err, hash) => {
+            if(err) throw err
+            user[0].password = hash
+            user[0].save()
+          })
         })
-      })
-    })
-  })
 
-  console.log('done')
+        for (let i = 0; i < 5; i++) {
+          records[i]['userId'] = user[0]._id
+        }
+      })
+      .then(() => {
+        User.find({ email: 'user2@example.com' }, (err, user) => {
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(user[0].password, salt, (err, hash) => {
+              if (err) throw err
+              user[0].password = hash
+              user[0].save()
+            })
+          })
+
+          for (let i = 5; i < 10; i++) {
+            records[i]['userId'] = user[0]._id
+          }
+        })
+        .then(() => {
+          Record.create(records)
+            .then(() => console.log('done, all the data are set'))
+            .catch((err) => console.error(err))
+        }).catch(err => console.error(err))
+      }).catch(err => console.error(err))
+    }).catch(err => console.error(err))
 })
