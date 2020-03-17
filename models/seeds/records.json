@@ -1,60 +1,70 @@
 [
   {
     "name": "午餐",
+    "merchant": "八方雲集",
     "category": "餐飲食品",
     "date": "2019/04/23",
     "amount": 60
   },
   {
     "name": "晚餐",
+    "merchant": "麥當勞",
     "category": "餐飲食品",
     "date": "2019/04/23",
     "amount": 60
   },
   {
     "name": "捷運",
+    "merchant": "臺北捷運",
     "category": "交通出行",
     "date": "2019/04/23",
     "amount": 120
   },
   {
     "name": "電影：驚奇隊長",
+    "merchant": "華納威秀",
     "category": "休閒娛樂",
     "date": "2019/04/23",
     "amount": 220
   },
   {
     "name": "租金",
+    "merchant": "信義房屋",
     "category": "家居物業",
     "date": "2019/04/01",
     "amount": 25000
   },
   {
     "name": "投資",
+    "merchant": "權益證券",
     "category": "其他",
     "date": "2020/03/15",
     "amount": 10000
   },
   {
     "name": "早餐",
+    "merchant": "美而美",
     "category": "餐飲食品",
     "date": "2020/03/15",
     "amount": 80
   },
   {
     "name": "旅遊",
+    "merchant": "雄獅旅遊",
     "category": "休閒娛樂",
     "date": "2020/03/14",
     "amount": 3000
   },
   {
     "name": "計程車",
+    "merchant": "台灣大車隊",
     "category": "交通出行",
     "date": "2020/03/14",
     "amount": 200
   },
   {
     "name": "換鎖",
+    "merchant": "鎖匠",
     "category": "家居物業",
     "date": "2020/03/14",
     "amount": 500
