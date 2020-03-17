@@ -11,6 +11,10 @@ tr:nth-child(odd){
   color: #ff9100;
 }
 
+.records-table .record-merchant {
+  font-size: 24px;
+}
+
 .records-table .record-amount {
   font-size: 36px;
 }

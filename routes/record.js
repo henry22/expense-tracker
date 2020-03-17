@@ -21,10 +21,11 @@ router.get('/:id', authenticated, (req, res) => {
 
 // 新增一筆record
 router.post('/', authenticated, (req, res) => {
-  const { name, category, date, amount } = req.body
+  const { name, merchant, category, date, amount } = req.body
 
   const newRecord = new Record({
     name: name,
+    merchant: merchant,
     category: category,
     date: date,
     amount: amount,
@@ -52,13 +53,14 @@ router.get('/:id/edit', authenticated, (req, res) => {
 
 // 修改一筆record
 router.put('/:id', authenticated, (req, res) => {
-  const { name, category, date, amount } = req.body
+  const { name, merchant, category, date, amount } = req.body
   const recordId = req.params.id
 
   Record.findOne({_id: recordId, userId: req.user._id}, (err, record) => {
     if (err) return console.error(err)
 
     record.name = name
+    record.merchant = merchant
     record.category = category
     record.date = date
     record.amount = amount
