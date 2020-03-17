@@ -35,7 +35,7 @@ handlebars.registerHelper('isEqual', (arg1, arg2, options) => {
   return arg1 === arg2 ? options.fn(this) : options.inverse(this)
 })
 
-mongoose.connect('mongodb://localhost/expense-tracker', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/expense-tracker', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
@@ -59,4 +59,4 @@ app.use('/records', require('./routes/record'))
 app.use('/users', require('./routes/user'))
 app.use('/auth', require('./routes/auths'))
 
-app.listen(port, () => console.log('Server is running'))
+app.listen(process.env.PORT || port, () => console.log('Server is running'))
