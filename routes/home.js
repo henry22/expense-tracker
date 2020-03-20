@@ -46,6 +46,7 @@ router.get('/', authenticated, (req, res) => {
     .lean()
     .exec((err, records) => {
       if (err) console.error(err)
+
       let totalAmount = sum(records)
 
       records.forEach(record => {
@@ -53,7 +54,7 @@ router.get('/', authenticated, (req, res) => {
         record.category = replaceIcon(record.category)
       })
 
-      res.render('index', { records: records, dropdownText: dropdownText, dropdownMonthText: dropdownMonthText, totalAmount: totalAmount})
+      res.render('index', { records: records, dropdownText: dropdownText, dropdownMonthText: dropdownMonthText, totalAmount: totalAmount, queryMonth: month, queryCategory: category})
     })
 })
 

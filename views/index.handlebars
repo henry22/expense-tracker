@@ -3,6 +3,23 @@
   {{!-- month dropdown --}}
   <div class="dropdown text-center my-4 col-10">
     <button class="btn btn-outline-light border border-dark bg-white dropdown-toggle text-dark d-flex align-items-center justify-content-between col-8 col-md-6 col-lg-4 ml-auto mb-4" type="button" data-toggle="dropdown">{{{dropdownMonthText}}}</button>
+    {{#if queryCategory}}
+    <div class="dropdown-menu col-6 col-lg-4 col-md-5">
+      <a class="dropdown-item" href="/?category={{{queryCategory}}}">全部</a>
+      <a class="dropdown-item" href='/?month=01&category={{{queryCategory}}}'>一月</a>
+      <a class="dropdown-item" href='/?month=02&category={{{queryCategory}}}'>二月</a>
+      <a class="dropdown-item" href='/?month=03&category={{{queryCategory}}}'>三月</a>
+      <a class="dropdown-item" href='/?month=04&category={{{queryCategory}}}'>四月</a>
+      <a class="dropdown-item" href='/?month=05&category={{{queryCategory}}}'>五月</a>
+      <a class="dropdown-item" href='/?month=06&category={{{queryCategory}}}'>六月</a>
+      <a class="dropdown-item" href='/?month=07&category={{{queryCategory}}}'>七月</a>
+      <a class="dropdown-item" href='/?month=08&category={{{queryCategory}}}'>八月</a>
+      <a class="dropdown-item" href='/?month=09&category={{{queryCategory}}}'>九月</a>
+      <a class="dropdown-item" href='/?month=10&category={{{queryCategory}}}'>十月</a>
+      <a class="dropdown-item" href='/?month=11&category={{{queryCategory}}}'>十一月</a>
+      <a class="dropdown-item" href='/?month=12&category={{{queryCategory}}}'>十二月</a>
+    </div>
+    {{else}}
     <div class="dropdown-menu col-6 col-lg-4 col-md-5">
       <a class="dropdown-item" href="/">全部</a>
       <a class="dropdown-item" href='/?month=01'>一月</a>
@@ -18,11 +35,22 @@
       <a class="dropdown-item" href='/?month=11'>十一月</a>
       <a class="dropdown-item" href='/?month=12'>十二月</a>
     </div>
+    {{/if}}
   </div>
 
   {{!-- category dropdown --}}
   <div class="dropdown text-center my-4 col-10">
     <button class="btn btn-outline-light border border-dark bg-white dropdown-toggle text-dark d-flex align-items-center justify-content-between col-8 col-md-6 col-lg-4 mr-auto mb-4" type="button" data-toggle="dropdown">{{{dropdownText}}}</button>
+    {{#if queryMonth}}
+    <div class="dropdown-menu col-6 col-lg-4 col-md-5">
+      <a class="dropdown-item" href="/?month={{{queryMonth}}}">全部</a>
+      <a class="dropdown-item" href="/?category=家居物業&month={{{queryMonth}}}">家居物業</a>
+      <a class="dropdown-item" href="/?category=交通出行&month={{{queryMonth}}}">交通出行</a>
+      <a class="dropdown-item" href="/?category=休閒娛樂&month={{{queryMonth}}}">休閒娛樂</a>
+      <a class="dropdown-item" href="/?category=餐飲食品&month={{{queryMonth}}}">餐飲食品</a>
+      <a class="dropdown-item" href="/?category=其他&month={{{queryMonth}}}">其他</a>
+    </div>
+    {{else}}
     <div class="dropdown-menu col-6 col-lg-4 col-md-5">
       <a class="dropdown-item" href="/">全部</a>
       <a class="dropdown-item" href="/?category=家居物業">家居物業</a>
@@ -31,6 +59,7 @@
       <a class="dropdown-item" href="/?category=餐飲食品">餐飲食品</a>
       <a class="dropdown-item" href="/?category=其他">其他</a>
     </div>
+    {{/if}}
   </div>
 </div>
 
