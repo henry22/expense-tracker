@@ -37,6 +37,9 @@ router.get('/', authenticated, (req, res) => {
 
   if(month) {
     dropdownMonthText = months[month]
+    selectCategory.date = {
+      $regex: `/${month}/`
+    }
   } else {
     dropdownMonthText = '全部'
   }
@@ -50,7 +53,7 @@ router.get('/', authenticated, (req, res) => {
       let totalAmount = sum(records)
 
       records.forEach(record => {
-        record.date = moment(record.date).format('YYYY/MM/DD')
+        // record.date = moment(record.date).format('YYYY/MM/DD')
         record.category = replaceIcon(record.category)
       })
 
