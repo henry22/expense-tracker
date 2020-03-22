@@ -71,7 +71,7 @@
 ###### 1.Index 頁面/首頁
 
 ![image](./public/img/index.png)
-![image](./public/img/index-2.png)
+![image](./public/img/Index-2.png)
 
 ###### 2.New 頁面
 
