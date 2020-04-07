@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Record = require('../models/record')
+// const Record = require('../models/record')
 const moment = require('moment')
 const sum = require('../public/js/sum')
 const replaceIcon = require('../public/js/replaceIcon')

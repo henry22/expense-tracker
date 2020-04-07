@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const mongoose = require('mongoose')
-const db = mongoose.connection
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const handlebars = require('handlebars')
@@ -35,14 +33,6 @@ handlebars.registerHelper('isEqual', (arg1, arg2, options) => {
   return arg1 === arg2 ? options.fn(this) : options.inverse(this)
 })
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/expense-tracker', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-})
-
-db.on('error', () => console.log('mongodb error'))
-db.once('open', () => console.log('mongodb connect'))
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
