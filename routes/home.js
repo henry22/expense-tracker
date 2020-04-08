@@ -2,10 +2,12 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const Record = db.Record
+const User = db.User
 const moment = require('moment')
 const sum = require('../public/js/sum')
 const replaceIcon = require('../public/js/replaceIcon')
 const {authenticated} = require('../config/auth')
+const {Op} = require('sequelize')
 
 // Index 頁面/首頁
 router.get('/', authenticated, (req, res) => {
@@ -45,20 +47,30 @@ router.get('/', authenticated, (req, res) => {
     dropdownMonthText = '全部'
   }
 
-  Record.find({userId: req.user._id})
-    .find(selectCategory)
-    .lean()
-    .exec((err, records) => {
-      if (err) console.error(err)
+  User.findByPk(req.user.id)
+    .then(user => {
+      if(!user) throw new Error('user not found')
 
-      let totalAmount = sum(records)
-
-      records.forEach(record => {
-        // record.date = moment(record.date).format('YYYY/MM/DD')
-        record.category = replaceIcon(record.category)
+      return Record.findAll({
+        where: {
+          UserId: req.user.id,
+          date: {
+            [Op.gte]: new Date(),
+            [Op.lte]: new Date(new Date() - 24 * 60 * 60 * 1000)
+          }
+        }
       })
+      .then(records => {
+        const isEmpty = records.length > 0 ? false : true
+        console.log('records', records)
+        let totalAmount = sum(records)
 
-      res.render('index', { records: records, dropdownText: dropdownText, dropdownMonthText: dropdownMonthText, totalAmount: totalAmount, queryMonth: month, queryCategory: category})
+        records.forEach(record => {
+          record.category = replaceIcon(record.category)
+        })
+
+        res.render('index', { records: records, dropdownText: dropdownText, dropdownMonthText: dropdownMonthText, totalAmount: totalAmount, queryMonth: month, queryCategory: category, isEmpty: isEmpty })
+      })
     })
 })
 

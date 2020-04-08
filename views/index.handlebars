@@ -94,6 +94,13 @@
     {{/each}}
   </tbody>
 </table>
+
+{{#if isEmpty}}
+<div class="container ">
+  <h2 class="text-center">無支出資料</h2>
+</div>
+{{/if}}
+
 <div class="text-center my-4">
   <a class="btn text-white border border-dark bg-warning btn-text" href="/records/new">新增支出</a>
 </div>

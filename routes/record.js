@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-// const Record = require('../models/record')
+const db = require('../models')
+const Record = db.Record
 const moment = require('moment')
 const {authenticated} = require('../config/auth')
 
@@ -29,13 +30,12 @@ router.post('/', authenticated, (req, res) => {
     category: category,
     date: date,
     amount: amount,
-    userId: req.user._id
+    UserId: req.user.id
   })
 
-  newRecord.save(err => {
-    if (err) return console.error(err)
-    return res.redirect('/')
-  })
+  newRecord.save()
+    .then(() => res.redirect('/'))
+    .catch(err => console.error(err))
 })
 
 // 修改一筆record頁面
