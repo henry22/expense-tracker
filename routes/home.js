@@ -52,17 +52,19 @@ router.get('/', authenticated, (req, res) => {
       if(!user) throw new Error('user not found')
 
       return Record.findAll({
+        raw: true,
+        nest: true,
         where: {
           UserId: req.user.id,
           date: {
-            [Op.gte]: new Date(),
-            [Op.lte]: new Date(new Date() - 24 * 60 * 60 * 1000)
+            [Op.gte]: new Date('1970-10-1'),
+            [Op.lte]: new Date('2050-1-1')
           }
         }
       })
       .then(records => {
         const isEmpty = records.length > 0 ? false : true
-        console.log('records', records)
+
         let totalAmount = sum(records)
 
         records.forEach(record => {

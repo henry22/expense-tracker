@@ -38,7 +38,12 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.use((req, res, next) => {
-  res.locals.user = req.user
+  const userObj = JSON.stringify(req.user)
+
+  if (userObj) {
+    res.locals.user = JSON.parse(userObj)
+  }
+
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
