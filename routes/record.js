@@ -43,13 +43,22 @@ router.post('/', authenticated, (req, res) => {
 router.get('/:id/edit', authenticated, (req, res) => {
   const recordId = req.params.id
 
-  Record.findOne({_id: recordId, userId: req.user._id})
-    .lean()
-    .exec((err, record) => {
-      if (err) return console.error(err)
-      record.date = moment(record.date).format('YYYY/MM/DD')
-      return res.render('edit', {record: record})
+  User.findByPk(req.user.id)
+    .then(user => {
+      if(!user) throw new Error('user not found')
+
+      return Record.findOne({
+        where: {
+          UserId: req.user.id,
+          id: recordId
+        }
+      })
     })
+    .then(record => {
+      let recordDate = new Date(record.date)
+      return res.render('edit', { record: record.get(), recordDate: moment(recordDate).format('YYYY/MM/DD')})
+    })
+    .catch(err => res.status(422).json(err))
 })
 
 // 修改一筆record
