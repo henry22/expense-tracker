@@ -85,8 +85,8 @@
         </td>
         <td class="record-amount">{{{this.amount}}}</td>
         <td class="text-center">
-          <a href="/records/{{{this._id}}}/edit" class="btn btn-success"><i class="fas fa-edit"></i>修改</a>
-          <form action="/records/{{{this._id}}}?_method=DELETE" method="POST" class="d-inline">
+          <a href="/records/{{{this.id}}}/edit" class="btn btn-success"><i class="fas fa-edit"></i>修改</a>
+          <form action="/records/{{{this.id}}}?_method=DELETE" method="POST" class="d-inline">
             <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>刪除</button>
           </form>
         </td>

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const Record = db.Record
+const User = db.User
 const moment = require('moment')
 const {authenticated} = require('../config/auth')
 
@@ -76,14 +77,19 @@ router.put('/:id', authenticated, (req, res) => {
 router.delete('/:id', authenticated, (req, res) => {
   const recordId = req.params.id
 
-  Record.findOne({_id: recordId, userId: req.user._id}, (err, record) => {
-    if (err) return console.error(err)
+  User.findByPk(req.user.id)
+    .then(user => {
+      if(!user) throw new Error('user not found')
 
-    record.remove(err => {
-      if (err) return console.error(err)
-      return res.redirect('/')
+      return Record.destroy({
+        where: {
+          UserId: req.user.id,
+          id: recordId
+        }
+      })
     })
-  })
+    .then(record => res.redirect('/'))
+    .catch(err => res.status(422).json(err))
 })
 
 module.exports = router
