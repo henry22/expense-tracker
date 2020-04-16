@@ -66,20 +66,28 @@ router.put('/:id', authenticated, (req, res) => {
   const { name, merchant, category, date, amount } = req.body
   const recordId = req.params.id
 
-  Record.findOne({_id: recordId, userId: req.user._id}, (err, record) => {
-    if (err) return console.error(err)
+  User.findByPk(req.user.id)
+    .then(user => {
+      if(!user) throw new Error('user not found')
 
-    record.name = name
-    record.merchant = merchant
-    record.category = category
-    record.date = date
-    record.amount = amount
-
-    record.save(err => {
-      if (err) return console.error(err)
-      return res.redirect('/')
+      return Record.findOne({
+        where: {
+          UserId: req.user.id,
+          id: recordId
+        }
+      })
     })
-  })
+    .then(record => {
+      record.name = name
+      record.nerchant = merchant
+      record.category = category
+      record.date = date
+      record.amount = amount
+
+      return record.save()
+    })
+    .then(record => res.redirect('/'))
+    .catch(err => res.status(422).json(err))
 })
 
 // 刪除一筆record
