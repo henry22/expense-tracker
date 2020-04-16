@@ -7,7 +7,7 @@ const moment = require('moment')
 const sum = require('../public/js/sum')
 const replaceIcon = require('../public/js/replaceIcon')
 const {authenticated} = require('../config/auth')
-const {Op} = require('sequelize')
+const sequelize = require('sequelize')
 
 // Index 頁面/首頁
 router.get('/', authenticated, (req, res) => {
@@ -15,7 +15,6 @@ router.get('/', authenticated, (req, res) => {
   let dropdownMonthText = '月份'
   const category = req.query.category
   const month = req.query.month
-  const selectCategory = {}
   const months = {
     '01': '一月',
     '02': '二月',
@@ -31,19 +30,49 @@ router.get('/', authenticated, (req, res) => {
     '12': '十二月'
   }
 
-  if (category) {
-    selectCategory.category = category
-    dropdownText = category
-  } else {
-    dropdownText = '全部'
+  let querySelect = {
+    raw: true,
+    nest: true,
+    where: {
+      UserId: req.user.id
+    },
+    order: [['date', 'DESC']]
   }
 
-  if(month) {
-    dropdownMonthText = months[month]
-    selectCategory.date = {
-      $regex: `/${month}/`
+  if(category && month) {
+    querySelect = {
+      raw: true,
+      nest: true,
+      where: { 
+        $and: sequelize.where(sequelize.fn("month", sequelize.col("date")), month),
+        category: category
+      }
     }
+
+    dropdownText = category
+    dropdownMonthText = months[month]
+  }  else if(category) {
+    querySelect = {
+      raw: true,
+      nest: true,
+      where: {
+        category: category
+      }
+    }
+
+    dropdownText = category
+  } else if(month) {
+    querySelect = {
+      raw: true,
+      nest: true,
+      where: {
+        $and: sequelize.where(sequelize.fn("month", sequelize.col("date")), month)
+      }
+    }
+
+    dropdownMonthText = months[month]
   } else {
+    dropdownText = '全部'
     dropdownMonthText = '全部'
   }
 
@@ -51,17 +80,7 @@ router.get('/', authenticated, (req, res) => {
     .then(user => {
       if(!user) throw new Error('user not found')
 
-      return Record.findAll({
-        raw: true,
-        nest: true,
-        where: {
-          UserId: req.user.id,
-          date: {
-            [Op.gte]: new Date('1970-10-1'),
-            [Op.lte]: new Date('2050-1-1')
-          }
-        }
-      })
+      return Record.findAll(querySelect)
       .then(records => {
         const isEmpty = records.length > 0 ? false : true
 
