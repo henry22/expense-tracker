@@ -69,6 +69,7 @@ router.get('/', authenticated, (req, res) => {
 
         records.forEach(record => {
           record.category = replaceIcon(record.category)
+          record.date = moment(record.date).format('YYYY/MM/DD')
         })
 
         res.render('index', { records: records, dropdownText: dropdownText, dropdownMonthText: dropdownMonthText, totalAmount: totalAmount, queryMonth: month, queryCategory: category, isEmpty: isEmpty })
