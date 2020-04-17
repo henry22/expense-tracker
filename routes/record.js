@@ -13,7 +13,8 @@ router.get('/', authenticated, (req, res) => {
 
 // 新增一筆record頁面
 router.get('/new', authenticated, (req, res) => {
-  return res.render('new')
+  const now = moment(new Date()).format('YYYY/MM/DD')
+  return res.render('new', { now: now })
 })
 
 // 顯示一筆record詳細頁面
