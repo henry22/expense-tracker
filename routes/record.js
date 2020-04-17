@@ -79,7 +79,7 @@ router.put('/:id', authenticated, (req, res) => {
     })
     .then(record => {
       record.name = name
-      record.nerchant = merchant
+      record.merchant = merchant
       record.category = category
       record.date = date
       record.amount = amount
