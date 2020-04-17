@@ -97,7 +97,7 @@ use expense_tracker_sequelize;
 
 ###### 1.Index 頁面/首頁
 
-![image](./public/img/index-sequelize)
+![image](./public/img/index-sequelize.png)
 
 ###### 2.New 頁面
 
