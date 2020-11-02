@@ -30,11 +30,11 @@ module.exports = passport => {
     passport.use(new FacebookStrategy({
         clientID: process.env.FACEBOOK_ID,
         clientSecret: process.env.FACEBOOK_SECRET,
-        callbackURL: process.env.FACEBOOK_CALLBACK,
+        callbackURL: 'http://localhost:3000/auth/facebook/callback',
         profileFields: ['email', 'displayName']
     }, (accessToken, refreshToken, profile, done) => {
         User.findOne({
-            email: profile._json.email
+            where: { email: profile._json.email }
         }).then(user => {
             if (!user) {
                 let randomPassword = Math.random().toString(36).slice(-8)
